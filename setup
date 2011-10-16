@@ -16,3 +16,6 @@ if [ `grep -c "alias.*git-achievements'" "$HOME/.bashrc"` == 0 ] ; then
     echo "alias git='git-achievements'" >> "$HOME/.bashrc"
 fi
 
+. "$HOME/.bashrc"
+
+

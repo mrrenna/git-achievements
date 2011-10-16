@@ -7,9 +7,12 @@ if [ ! -f "$HOME/.bashrc" ] ; then
     touch "$HOME/.bashrc"
 fi
 
-echo >> "$HOME/.bashrc"
-
 if [ `grep -c "PATH.*$(pwd)" "$HOME/.bashrc"` == 0 ] ; then
+    echo >> "$HOME/.bashrc"
     echo "export PATH=\$PATH:`pwd`" >> "$HOME/.bashrc"
+fi
+
+if [ `grep -c "alias.*git-achievements'" "$HOME/.bashrc"` == 0 ] ; then
+    echo "alias git='git-achievements'" >> "$HOME/.bashrc"
 fi
 

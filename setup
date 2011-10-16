@@ -2,7 +2,14 @@
 
 gh_user=`git remote -v | grep push | sed -e 's/.\+://g' -e 's/\/.\+//g'`
 sed -i "s/\(github.com\/\)\\S\+\(\/\)/\1$gh_user\2/g" git-achievements
+
 if [ ! -f "$HOME/.bashrc" ] ; then
     touch "$HOME/.bashrc"
+fi
+
+echo >> "$HOME/.bashrc"
+
+if [ `grep -c "PATH.*$(pwd)" "$HOME/.bashrc"` == 0 ] ; then
+    echo "export PATH=\$PATH:`pwd`" >> "$HOME/.bashrc"
 fi
 

@@ -1,6 +1,11 @@
 #!/bin/bash
 
-gh_user=`git remote -v | grep push | sed -e 's/.\+://g' -e 's/\/.\+//g'`
+if [ -z `git config --global --get github.user` ] ; then
+    gh_user=`git remote -v | grep push | sed -e 's/.\+://g' -e 's/\/.\+//g'`
+else
+    gh_user=`git config --global --get github.user`
+fi
+
 sed -i "s/\(github.com\/\)\\S\+\(\/\)/\1$gh_user\2/g" git-achievements
 
 if [ ! -f "$HOME/.bashrc" ] ; then
@@ -9,7 +14,7 @@ fi
 
 if [ `grep -c "PATH.*$(pwd)" "$HOME/.bashrc"` == 0 ] ; then
     echo >> "$HOME/.bashrc"
-    echo "export PATH=\$PATH:`pwd`" >> "$HOME/.bashrc"
+    echo "export PATH=\$PATH:$(pwd)" >> "$HOME/.bashrc"
 fi
 
 if [ `grep -c "alias.*git-achievements'" "$HOME/.bashrc"` == 0 ] ; then
@@ -19,5 +24,4 @@ fi
 . "$HOME/.bashrc"
 
 git config --global achievement.upload true
-
 

@@ -14,7 +14,7 @@ fi
 
 if [ `grep -c "PATH.*$(pwd)" "$HOME/.bashrc"` == 0 ] ; then
     echo >> "$HOME/.bashrc"
-    ga_path=$(pwd) | sed 's/ /\\ /g'
+    ga_path=`pwd | sed 's/ /\\ /g'`
     echo "export PATH=\$PATH:$ga_path" >> "$HOME/.bashrc"
 fi
 
